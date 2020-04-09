@@ -1,0 +1,44 @@
+.leftDiv{
+    float: left;
+    margin: 10px;
+}
+
+.rightDiv{
+    float: right;
+    margin: 10px;
+}
+
+.correct{
+    background-color: lightgreen;
+}
+
+.unCorrect{
+    background-color: lightcoral;
+}
+
+#registrationButton{
+    background-color: lightblue;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+#logRej {
+    border-style: solid;
+    border-color: orange;
+    color: lightgray;
+    font-weight: bolder;
+}
+
+#next{
+    background-color: darkgray;
+    color: black;
+    border-style: solid;
+}
+
+#previous{
+    background-color: darkgray;
+    color: black;
+    border-style: solid;
+}

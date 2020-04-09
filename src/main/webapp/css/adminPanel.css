@@ -1,0 +1,42 @@
+table{
+    border-style: solid;
+}
+
+th{
+    font-weight: bold;
+    background-color: lightgray;
+}
+
+td{
+    border: 1px dotted black;
+
+}
+
+.lp{
+    column-width: 30px;
+}
+
+.user_name{
+    column-width: 200px;
+}
+.role{
+    column-width: 150px;
+}
+.institution{
+    column-width: 500px;
+}
+.email{
+    column-width: 200px;
+}
+.dez{
+    column-width: 75px;
+    position: center;
+}
+.delete{
+    column-width: 75px;
+    position: center;
+}
+.chRole{
+    column-width: 75px;
+    position: center;
+}
