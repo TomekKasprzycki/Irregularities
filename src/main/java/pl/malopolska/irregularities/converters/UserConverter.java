@@ -1,6 +1,5 @@
 package pl.malopolska.irregularities.converters;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.malopolska.irregularities.dto.UserDto;
 import pl.malopolska.irregularities.model.User;
@@ -11,11 +10,13 @@ import java.util.List;
 @Service
 public class UserConverter {
 
-    @Autowired
     private RoleConverter roleConverter;
-
-    @Autowired
     private InstitutionConverter institutionConverter;
+
+    private UserConverter(RoleConverter roleConverter, InstitutionConverter institutionConverter){
+        this.institutionConverter = institutionConverter;
+        this.roleConverter = roleConverter;
+    }
 
     public UserDto convertToDto(User user){
         UserDto userDto = new UserDto();

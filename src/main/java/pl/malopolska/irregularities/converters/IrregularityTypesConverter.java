@@ -1,6 +1,5 @@
 package pl.malopolska.irregularities.converters;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.malopolska.irregularities.dto.IrregularityTypesDto;
 import pl.malopolska.irregularities.model.IrregularityTypes;
@@ -12,11 +11,14 @@ import java.util.List;
 @Service
 public class IrregularityTypesConverter {
 
-    @Autowired
     private IrregularityConverter irregularityConverter;
-
-    @Autowired
     private IrregularitiesService irregularitiesService;
+
+    private IrregularityTypesConverter(IrregularityConverter irregularityConverter,
+                                       IrregularitiesService irregularitiesService){
+        this.irregularitiesService = irregularitiesService;
+        this.irregularityConverter = irregularityConverter;
+    }
 
     public IrregularityTypes convertFromDto(IrregularityTypesDto irregularityTypesDto){
         IrregularityTypes irregularityType = new IrregularityTypes();
@@ -31,7 +33,7 @@ public class IrregularityTypesConverter {
         IrregularityTypesDto irregularityTypeDto = new IrregularityTypesDto();
         irregularityTypeDto.setId(irregularityTypes.getId());
         irregularityTypeDto.setName(irregularityTypes.getName());
-        //irregularityTypeDto.setIrregularityDtoList(irregularityConverter.convertToDto(irregularityTypes.getIrregularityList()));
+        irregularityTypeDto.setIrregularityDto(irregularityConverter.convertToDto(irregularityTypes.getIrregularityList()));
 
         return irregularityTypeDto;
     }

@@ -1,6 +1,5 @@
 package pl.malopolska.irregularities.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.malopolska.irregularities.model.Beneficiary;
 import pl.malopolska.irregularities.model.Project;
@@ -11,8 +10,11 @@ import java.util.List;
 @Service
 public class BeneficiaryService {
 
-    @Autowired
     private BeneficiaryRepo beneficiaryRepo;
+
+    private  BeneficiaryService(BeneficiaryRepo beneficiaryRepo) {
+        this.beneficiaryRepo = beneficiaryRepo;
+    }
 
     public Beneficiary getBeneficiaryByProject(Project project){return beneficiaryRepo.findBeneficiaryByProject(project);}
 

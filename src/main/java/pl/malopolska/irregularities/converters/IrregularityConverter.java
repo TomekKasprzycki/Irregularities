@@ -1,13 +1,8 @@
 package pl.malopolska.irregularities.converters;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.malopolska.irregularities.dto.IrregularityDto;
 import pl.malopolska.irregularities.model.Irregularity;
-import pl.malopolska.irregularities.services.DocumentBaseIrregularityService;
-import pl.malopolska.irregularities.services.IrregularityTypesService;
-import pl.malopolska.irregularities.services.PaymentRequestService;
-import pl.malopolska.irregularities.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,29 +10,22 @@ import java.util.List;
 @Service
 public class IrregularityConverter {
 
-    @Autowired
     private PaymentRequestConverter paymentRequestConverter;
-
-    @Autowired
     private DocumentBaseIrregularityConverter dbic;
-
-    @Autowired
     private IrregularityTypesConverter irregularityTypesConverter;
-
-    @Autowired
     private UserConverter userConverter;
 
-    @Autowired
-    private UserService userService;
+    private IrregularityConverter(
+             PaymentRequestConverter paymentRequestConverter,
+             DocumentBaseIrregularityConverter dbic,
+             IrregularityTypesConverter irregularityTypesConverter,
+             UserConverter userConverter) {
+        this.paymentRequestConverter = paymentRequestConverter;
+        this.dbic = dbic;
+        this.irregularityTypesConverter = irregularityTypesConverter;
+        this.userConverter = userConverter;
+    }
 
-    @Autowired
-    private DocumentBaseIrregularityService dbis;
-
-    @Autowired
-    private IrregularityTypesService its;
-
-    @Autowired
-    private PaymentRequestService prs;
 
 
     public Irregularity convertFromDto(IrregularityDto irregularityDto){
@@ -50,21 +38,20 @@ public class IrregularityConverter {
         irregularity.setClosedByMA(irregularityDto.getClosedByMA());
         irregularity.setContractingInstitutionNIP(irregularityDto.getContractingInstitutionNIP());
         irregularity.setContractReferenceNumber(irregularityDto.getContractReferenceNumber());
-        irregularity.setCreator(userService.getUserById(irregularityDto.getCreatorId()));
+        irregularity.setCreator(userConverter.convertFromDto(irregularityDto.getUserDto()));
         irregularity.setTotalExpenses(irregularityDto.getTotalExpenses());
         irregularity.setQualifiedExpenses(irregularityDto.getQualifiedExpenses());
         irregularity.setDetectedBeforeSendToEC(irregularityDto.isDetectedBeforeSendToEC());
-        irregularity.setDocumentBaseIrregularity(dbis.getById(irregularityDto.getDocumentBaseIrregularityId()));
+        irregularity.setDocumentBaseIrregularity(dbic.convertFromDto(irregularityDto.getDocumentBaseIrregularityDto()));
         irregularity.setDateOfIrregularity(irregularityDto.getDateOfIrregularity());
         irregularity.setDescription(irregularityDto.getDescription());
         irregularity.setCaseID(irregularityDto.getCaseID());
         irregularity.setNotes(irregularityDto.getNotes());
         irregularity.setVisibleToCA(irregularityDto.isVisibleToCA());
-        irregularity.setPaymentRequestList(prs.getAllByIrregularityId(irregularityDto.getId()));
+        irregularity.setPaymentRequestList(paymentRequestConverter.convertFromDto(irregularityDto.getPaymentRequestDto()));
         irregularity.setCreated(irregularityDto.getCreated());
-        irregularity.setIrregularityTypesList(its.getAllByIrregularityId(irregularityDto.getId()));
-        //irregularity.setDocumentBaseIrregularity(dbic.convertFromDto(irregularityDto.getDocumentBaseIrregularityDto()));
-
+        irregularity.setIrregularityTypesList(irregularityTypesConverter.convertFromDto(irregularityDto.getIrregularityTypesDto()));
+        irregularity.setDocumentBaseIrregularity(dbic.convertFromDto(irregularityDto.getDocumentBaseIrregularityDto()));
         return irregularity;
     }
 
@@ -78,19 +65,19 @@ public class IrregularityConverter {
         irregularityDto.setClosedByMA(irregularityDto.getClosedByMA());
         irregularityDto.setContractingInstitutionNIP(irregularity.getContractingInstitutionNIP());
         irregularityDto.setContractReferenceNumber(irregularity.getContractReferenceNumber());
-        irregularityDto.setCreatorId(irregularity.getCreator().getId());
+        irregularityDto.setUserDto(userConverter.convertToDto(irregularity.getCreator()));
         irregularityDto.setTotalExpenses(irregularity.getTotalExpenses());
         irregularityDto.setQualifiedExpenses(irregularity.getQualifiedExpenses());
         irregularityDto.setDetectedBeforeSendToEC(irregularity.isDetectedBeforeSendToEC());
-        irregularityDto.setDocumentBaseIrregularityId(irregularity.getDocumentBaseIrregularity().getId());
+        irregularityDto.setDocumentBaseIrregularityDto(dbic.convertToDto(irregularity.getDocumentBaseIrregularity()));
         irregularityDto.setDateOfIrregularity(irregularity.getDateOfIrregularity());
         irregularityDto.setDescription(irregularity.getDescription());
         irregularityDto.setCaseID(irregularity.getCaseID());
         irregularityDto.setNotes(irregularity.getNotes());
         irregularityDto.setVisibleToCA(irregularity.isVisibleToCA());
-        //irregularityDto.setPaymentRequestDtoList(paymentRequestConverter.convertToDto(irregularity.getPaymentRequestList()));
+        irregularityDto.setPaymentRequestDto(paymentRequestConverter.convertToDto(irregularity.getPaymentRequestList()));
         irregularityDto.setCreated(irregularity.getCreated());
-        //irregularityDto.setIrregularityTypesDtoList(irregularityTypesConverter.convertToDto(irregularity.getIrregularityTypesList()));
+        irregularityDto.setIrregularityTypesDto(irregularityTypesConverter.convertToDto(irregularity.getIrregularityTypesList()));
 
         return irregularityDto;
     }

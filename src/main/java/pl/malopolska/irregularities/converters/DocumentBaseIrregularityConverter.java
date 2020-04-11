@@ -1,6 +1,5 @@
 package pl.malopolska.irregularities.converters;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.malopolska.irregularities.dto.DocumentBaseIrregularityDto;
 import pl.malopolska.irregularities.model.DocumentBaseIrregularity;
@@ -11,14 +10,17 @@ import java.util.List;
 @Service
 public class DocumentBaseIrregularityConverter {
 
-    @Autowired
     private IrregularityConverter irregularityConverter;
+
+    private DocumentBaseIrregularityConverter(IrregularityConverter irregularityConverter){
+        this.irregularityConverter = irregularityConverter;
+    }
 
     public DocumentBaseIrregularity convertFromDto(DocumentBaseIrregularityDto documentBaseIrregularityDto){
         DocumentBaseIrregularity documentBaseIrregularity = new DocumentBaseIrregularity();
         documentBaseIrregularity.setId(documentBaseIrregularityDto.getId());
         documentBaseIrregularity.setName(documentBaseIrregularityDto.getName());
-        //documentBaseIrregularity.setIrregularity(irregularityConverter.convertFromDto(documentBaseIrregularityDto.getIrregularityDto()));
+        documentBaseIrregularity.setIrregularity(irregularityConverter.convertFromDto(documentBaseIrregularityDto.getIrregularityDto()));
 
         return documentBaseIrregularity;
     }
@@ -27,7 +29,7 @@ public class DocumentBaseIrregularityConverter {
         DocumentBaseIrregularityDto documentBaseIrregularityDto = new DocumentBaseIrregularityDto();
         documentBaseIrregularityDto.setId(documentBaseIrregularity.getId());
         documentBaseIrregularityDto.setName(documentBaseIrregularity.getName());
-        //documentBaseIrregularityDto.setIrregularityDto(irregularityConverter.convertToDto(documentBaseIrregularity.getIrregularity()));
+        documentBaseIrregularityDto.setIrregularityDto(irregularityConverter.convertToDto(documentBaseIrregularity.getIrregularity()));
 
         return documentBaseIrregularityDto;
     }

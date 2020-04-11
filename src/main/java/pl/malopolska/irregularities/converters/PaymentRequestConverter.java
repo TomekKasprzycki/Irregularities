@@ -1,6 +1,5 @@
 package pl.malopolska.irregularities.converters;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.malopolska.irregularities.dto.PaymentRequestDto;
 import pl.malopolska.irregularities.model.PaymentRequest;
@@ -12,14 +11,17 @@ import java.util.List;
 @Service
 public class PaymentRequestConverter {
 
-    @Autowired
     private IrregularityConverter irregularityConverter;
-
-    @Autowired
     private ProjectConverter projectConverter;
-
-    @Autowired
     private IrregularitiesService irregularitiesService;
+
+    private PaymentRequestConverter(IrregularityConverter irregularityConverter,
+                                    ProjectConverter projectConverter,
+                                    IrregularitiesService irregularitiesService){
+        this.irregularitiesService = irregularitiesService;
+        this.irregularityConverter = irregularityConverter;
+        this.projectConverter = projectConverter;
+    }
 
     public PaymentRequest convertFromDto(PaymentRequestDto paymentRequestDto){
         PaymentRequest paymentRequest = new PaymentRequest();
@@ -46,7 +48,7 @@ public class PaymentRequestConverter {
         paymentRequestDto.setDateOfApproval(paymentRequest.getDateOfApproval());
         paymentRequestDto.setFunding(paymentRequest.getFunding());
         paymentRequestDto.setIncomeDeducted(paymentRequest.getIncomeDeducted());
-        //paymentRequestDto.setIrregularityDtoList(irregularityConverter.convertToDto(paymentRequest.getIrregularityList()));
+        paymentRequestDto.setIrregularityDto(irregularityConverter.convertToDto(paymentRequest.getIrregularityList()));
         paymentRequestDto.setProjectDto(projectConverter.convertToDto(paymentRequest.getProject()));
         paymentRequestDto.setQualifiedExpenses(paymentRequest.getQualifiedExpenses());
         paymentRequestDto.setQualifiedExpensesAfterValidation(paymentRequest.getQualifiedExpensesAfterValidation());

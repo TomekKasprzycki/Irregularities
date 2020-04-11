@@ -1,6 +1,5 @@
 package pl.malopolska.irregularities.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.malopolska.irregularities.dto.UserDto;
 import pl.malopolska.irregularities.model.User;
@@ -11,8 +10,11 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepo userRepo;
+
+    private UserService(UserRepo userRepo){
+        this.userRepo = userRepo;
+    }
 
     public User getUserByEmail(String login){
         return userRepo.findUserByEmail(login);

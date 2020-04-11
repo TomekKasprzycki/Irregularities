@@ -22,4 +22,6 @@ public interface PaymentRequestRepo extends JpaRepository<PaymentRequest, Long> 
     List<PaymentRequest> findAllByIrregularitiesId(@Param("id") Long id);
 
     List<PaymentRequest> findAllByProjectId(Long id);
+
+    PaymentRequest findPRById(Long id);
 }

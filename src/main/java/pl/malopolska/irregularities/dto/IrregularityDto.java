@@ -1,6 +1,7 @@
 package pl.malopolska.irregularities.dto;
 
 import lombok.Data;
+import pl.malopolska.irregularities.model.Beneficiary;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,9 +12,9 @@ public class IrregularityDto {
 
     private Long id;
     private LocalDateTime created;
-    private Long creatorId;
+    private UserDto userDto; //creator
     private LocalDate dateOfIrregularity;
-    private Long documentBaseIrregularityId;
+    private DocumentBaseIrregularityDto documentBaseIrregularityDto;
     private String description;
     private String controlReferenceNumber;
     private String contractReferenceNumber;
@@ -29,8 +30,9 @@ public class IrregularityDto {
     private boolean CAHasEnded;
     private Long caseID;
     private String contractingInstitutionNIP;
-    private Long beneficiaryId;
-    private List<Long> irregularityTypes;
-    private Long projectId;
+    private BeneficiaryDto beneficiaryDto;
+    private List<IrregularityTypesDto> irregularityTypesDto;
+    private ProjectDto projectDto;
+    private List<PaymentRequestDto> paymentRequestDto;
 
 }

@@ -1,6 +1,5 @@
 package pl.malopolska.irregularities.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.malopolska.irregularities.model.Irregularity;
 import pl.malopolska.irregularities.repository.IrregularityRepo;
@@ -10,8 +9,11 @@ import java.util.List;
 @Service
 public class IrregularitiesService {
 
-    @Autowired
     private IrregularityRepo irregularityRepo;
+
+    private IrregularitiesService(IrregularityRepo irregularityRepo){
+        this.irregularityRepo = irregularityRepo;
+    }
 
     public List<Irregularity> getAllToShow(){return irregularityRepo.findAll();}
 

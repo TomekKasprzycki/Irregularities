@@ -1,6 +1,5 @@
 package pl.malopolska.irregularities.converters;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.malopolska.irregularities.dto.BeneficiaryDto;
 import pl.malopolska.irregularities.model.Beneficiary;
@@ -11,15 +10,18 @@ import java.util.List;
 @Service
 public class BeneficiaryConverter {
 
-    @Autowired
     private ProjectConverter projectConverter;
+
+    private BeneficiaryConverter(ProjectConverter projectConverter){
+        this.projectConverter = projectConverter;
+    }
 
     public BeneficiaryDto convertToDto(Beneficiary beneficiary){
         BeneficiaryDto beneficiaryDto = new BeneficiaryDto();
         beneficiaryDto.setId(beneficiary.getId());
         beneficiaryDto.setName(beneficiary.getName());
         beneficiaryDto.setNip(beneficiary.getNip());
-        //beneficiaryDto.setProjectList(projectConverter.convertToDto(beneficiary.getProjectList()));
+        beneficiaryDto.setProjectDto(projectConverter.convertToDto(beneficiary.getProjectList()));
 
         return beneficiaryDto;
     }
@@ -29,7 +31,7 @@ public class BeneficiaryConverter {
         beneficiary.setId(beneficiaryDto.getId());
         beneficiary.setName(beneficiaryDto.getName());
         beneficiary.setNip(beneficiaryDto.getNip());
-        //beneficiary.setProjectList(projectConverter.convertFromDto(beneficiaryDto.getProjectList()));
+        beneficiary.setProjectList(projectConverter.convertFromDto(beneficiaryDto.getProjectDto()));
 
         return beneficiary;
     }

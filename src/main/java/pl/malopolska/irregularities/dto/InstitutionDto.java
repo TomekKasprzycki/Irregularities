@@ -9,6 +9,6 @@ public class InstitutionDto {
 
     private Long id;
     private String name;
-    List<UserDto> userDtoList;
+    List<UserDto> userDto;
 
 }
