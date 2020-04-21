@@ -20,6 +20,6 @@ public class DocumentBaseIrregularity {
     @NotEmpty
     private String name;
     @OneToMany(mappedBy = "documentBaseIrregularity")
-    List<Irregularity> irregularity;
+    private List<Irregularity> irregularity;
 
 }

@@ -11,13 +11,16 @@
 	<groupId>pl.malopolska</groupId>
 	<artifactId>irregularities</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
 	<name>irregularities</name>
 	<description>Regional irregularity reporting system</description>
+
 
 	<properties>
 		<java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>5.2.5.RELEASE</spring.version>
+
 	</properties>
 
 	<dependencies>
@@ -42,6 +45,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+            <version>1.18.12</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -55,11 +59,16 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.2.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -154,17 +163,24 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
-
 	</dependencies>
 
 	<build>
+        <resources>
+            <resource>
+                <directory>src/main/webapp</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+
 	</build>
 
 </project>

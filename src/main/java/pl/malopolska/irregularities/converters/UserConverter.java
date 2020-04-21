@@ -41,7 +41,7 @@ public class UserConverter {
         user.setInstitution(institutionConverter.convertFromDto(userDto.getInstitutionDto()));
         user.setRole(roleConverter.convertFromDto(userDto.getRoleDto()));
         user.setActive(false);
-        user.setPassword(userDto.getPassword());
+
 
         return user;
     }

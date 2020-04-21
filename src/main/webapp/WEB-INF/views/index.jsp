@@ -18,6 +18,6 @@
         </p>
 
     </div>
- <%@include file="../header_footer/footer.html"%>
+ <%@include file="../header_footer/footer.jsp"%>
 </body>
 </html>

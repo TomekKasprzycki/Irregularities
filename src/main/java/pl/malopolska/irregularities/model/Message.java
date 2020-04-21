@@ -16,10 +16,10 @@ public class Message {
     private String message;
     private Long caseID;
     @ManyToOne
-    @JoinColumn(name="user_id",referencedColumnName = "id")
+    @JoinColumn(name="creator_id",referencedColumnName = "id")
     private User creator;
     @ManyToOne
-    @JoinColumn(name="user_id",referencedColumnName = "id")
+    @JoinColumn(name="addressee_id",referencedColumnName = "id")
     private User addressee;
 
 

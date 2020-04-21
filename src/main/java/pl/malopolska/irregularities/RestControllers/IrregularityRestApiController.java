@@ -24,8 +24,8 @@ public class IrregularityRestApiController {
 
     @Autowired
     private IrregularityConverter irregularityConverter;
-
-    @PostMapping(value = "/rest/new_irregularity",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//APPLICATION_JSON_UTF8_VALUE
+    @PostMapping(value = "/rest/new_irregularity",consumes = MediaType.APPLICATION_JSON_VALUE)
     public RedirectView saveNewIrregularity(@RequestBody IrregularityDto irregularityDto, HttpSession session){
         Irregularity irregularity = irregularityConverter.convertFromDto(irregularityDto);
         irregularity.setCreated(LocalDateTime.now());

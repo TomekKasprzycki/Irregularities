@@ -10,17 +10,17 @@ import java.util.List;
 @Service
 public class InstitutionConverter {
 
-    private UserConverter userConverter;
-
-    private InstitutionConverter(UserConverter userConverter){
-        this.userConverter = userConverter;
-    }
+//    private UserConverter userConverter;
+//
+//    private InstitutionConverter(UserConverter userConverter){
+//        this.userConverter = userConverter;
+//    }
 
     public Institution convertFromDto(InstitutionDto institutionDto){
         Institution institution = new Institution();
         institution.setId(institutionDto.getId());
         institution.setName(institutionDto.getName());
-        institution.setUserList(userConverter.convertFromDto(institutionDto.getUserDto()));
+//        institution.setUserList(userConverter.convertFromDto(institutionDto.getUserDto()));
         return institution;
     }
 
@@ -28,7 +28,7 @@ public class InstitutionConverter {
         InstitutionDto institutionDto = new InstitutionDto();
         institutionDto.setId(institution.getId());
         institutionDto.setName(institution.getName());
-        institutionDto.setUserDto(userConverter.convertToDto(institution.getUserList()));
+//        institutionDto.setUserDto(userConverter.convertToDto(institution.getUserList()));
         return institutionDto;
     }
 

@@ -72,7 +72,7 @@ public class IrregularitiesPreviewController {
             ProjectDto projectDto = projectConverter.convertToDto(projectService.getProjectByIrregularityId(id));
             List<PaymentRequestDto> paymentRequestDtoList =
                     paymentRequestConverter.convertToDto(paymentRequestService.getAllByIrregularityId(id));
-            User user = userService.getUserById(irregularityDto.getCreatorId());
+            User user = userService.getUserById(irregularityDto.getId());
             UserDto userDto = userConverter.convertToDto(user);
             List<IrregularityTypesDto> irregularityTypesListDto = itc.convertToDto(its.getAllByIrregularityId(id));
             DocumentBaseIrregularityDto documentBaseIrregularityDto = dbic.convertToDto(dbis.getById(id));

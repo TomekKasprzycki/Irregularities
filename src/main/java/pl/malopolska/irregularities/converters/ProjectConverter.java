@@ -12,21 +12,21 @@ import java.util.List;
 @Service
 public class ProjectConverter {
 
-    private PaymentRequestConverter prc;
-    private BeneficiaryConverter beneficiaryConverter;
-
-    private ProjectConverter(BeneficiaryConverter beneficiaryConverter,
-                             PaymentRequestConverter prc){
-        this.beneficiaryConverter = beneficiaryConverter;
-        this.prc = prc;
-    }
+//    private PaymentRequestConverter prc;
+//    private BeneficiaryConverter beneficiaryConverter;
+//
+//    private ProjectConverter(BeneficiaryConverter beneficiaryConverter,
+//                             PaymentRequestConverter prc){
+//        this.beneficiaryConverter = beneficiaryConverter;
+//        this.prc = prc;
+//    }
 
     public Project convertFromDto(ProjectDto projectDto){
         Project project = new Project();
         project.setId(projectDto.getId());
         project.setProjectNumber(projectDto.getProjectNumber());
-        project.setBeneficiary(beneficiaryConverter.convertFromDto(projectDto.getBeneficiaryDto()));
-        project.setPaymentRequestList(prc.convertFromDto(projectDto.getPaymentRequestDto()));
+//        project.setBeneficiary(beneficiaryConverter.convertFromDto(projectDto.getBeneficiaryDto()));
+//        project.setPaymentRequestList(prc.convertFromDto(projectDto.getPaymentRequestDto()));
 
         return project;    }
 
@@ -34,8 +34,8 @@ public class ProjectConverter {
         ProjectDto projectDto = new ProjectDto();
         projectDto.setId(project.getId());
         projectDto.setProjectNumber(project.getProjectNumber());
-        projectDto.setBeneficiaryDto(beneficiaryConverter.convertToDto(project.getBeneficiary()));
-        projectDto.setPaymentRequestDto(prc.convertToDto(project.getPaymentRequestList()));
+//        projectDto.setBeneficiaryDto(beneficiaryConverter.convertToDto(project.getBeneficiary()));
+//        projectDto.setPaymentRequestDto(prc.convertToDto(project.getPaymentRequestList()));
 
         return projectDto;
     }

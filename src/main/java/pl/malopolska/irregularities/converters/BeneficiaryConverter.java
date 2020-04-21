@@ -10,18 +10,18 @@ import java.util.List;
 @Service
 public class BeneficiaryConverter {
 
-    private ProjectConverter projectConverter;
+//    private ProjectConverter projectConverter;
 
-    private BeneficiaryConverter(ProjectConverter projectConverter){
-        this.projectConverter = projectConverter;
-    }
+//    private BeneficiaryConverter(ProjectConverter projectConverter){
+//        this.projectConverter = projectConverter;
+//    }
 
     public BeneficiaryDto convertToDto(Beneficiary beneficiary){
         BeneficiaryDto beneficiaryDto = new BeneficiaryDto();
         beneficiaryDto.setId(beneficiary.getId());
         beneficiaryDto.setName(beneficiary.getName());
         beneficiaryDto.setNip(beneficiary.getNip());
-        beneficiaryDto.setProjectDto(projectConverter.convertToDto(beneficiary.getProjectList()));
+//        beneficiaryDto.setProjectDto(projectConverter.convertToDto(beneficiary.getProjectList()));
 
         return beneficiaryDto;
     }
@@ -31,7 +31,7 @@ public class BeneficiaryConverter {
         beneficiary.setId(beneficiaryDto.getId());
         beneficiary.setName(beneficiaryDto.getName());
         beneficiary.setNip(beneficiaryDto.getNip());
-        beneficiary.setProjectList(projectConverter.convertFromDto(beneficiaryDto.getProjectDto()));
+//        beneficiary.setProjectList(projectConverter.convertFromDto(beneficiaryDto.getProjectDto()));
 
         return beneficiary;
     }

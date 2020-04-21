@@ -10,18 +10,18 @@ import java.util.List;
 @Service
 public class RoleConverter {
 
-    private UserConverter userConverter;
-
-    private RoleConverter(UserConverter userConverter){
-        this.userConverter = userConverter;
-    }
+//    private UserConverter userConverter;
+//
+//    private RoleConverter(UserConverter userConverter){
+//        this.userConverter = userConverter;
+//    }
 
     public Role convertFromDto(RoleDto roleDto){
         Role role = new Role();
         role.setId(roleDto.getId());
         role.setName(roleDto.getName());
         role.setDescription(roleDto.getDescription());
-        role.setUsers(userConverter.convertFromDto(roleDto.getUsersDto()));
+//        role.setUsers(userConverter.convertFromDto(roleDto.getUsersDto()));
         return role;
     }
 
@@ -30,7 +30,7 @@ public class RoleConverter {
         roleDto.setId(role.getId());
         roleDto.setName(role.getName());
         roleDto.setDescription(role.getDescription());
-        roleDto.setUsersDto(userConverter.convertToDto(role.getUsers()));
+//        roleDto.setUsersDto(userConverter.convertToDto(role.getUsers()));
         return roleDto;
     }
 

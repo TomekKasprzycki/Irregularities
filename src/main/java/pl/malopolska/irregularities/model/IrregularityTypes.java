@@ -21,6 +21,6 @@ public class IrregularityTypes {
     private String name;
     @ManyToMany
     @JoinColumn(name="irregularity_ID", referencedColumnName = "id")
-    List<Irregularity> irregularityList;
+    private List<Irregularity> irregularityList;
 
 }

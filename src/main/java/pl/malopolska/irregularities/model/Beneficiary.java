@@ -24,8 +24,8 @@ public class Beneficiary {
     @NotNull
     private String nip;
     @OneToMany(mappedBy = "beneficiary")
-    List<Project> projectList;
+    private List<Project> projectList;
     @OneToMany(mappedBy = "beneficiary")
-    List<Irregularity> irregularityList;
+    private List<Irregularity> irregularityList;
 
 }

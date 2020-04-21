@@ -24,15 +24,15 @@ public class Irregularity {
     private LocalDateTime created;
     @ManyToOne
     @JoinColumn(name = "user_ID",referencedColumnName = "id")
-    User creator;
+    private User creator;
     private LocalDate dateOfIrregularity;
     @ManyToMany(mappedBy = "irregularityList")
-    List<PaymentRequest> paymentRequestList;
+    private List<PaymentRequest> paymentRequestList;
     @ManyToOne
     @JoinColumn(name="documentBaseIrregularity_ID", referencedColumnName = "id")
-    DocumentBaseIrregularity documentBaseIrregularity;
+    private DocumentBaseIrregularity documentBaseIrregularity;
     @ManyToMany(mappedBy = "irregularityList")
-    List<IrregularityTypes> irregularityTypesList;
+    private List<IrregularityTypes> irregularityTypesList;
     private String description;
     private String controlReferenceNumber;
     private String contractReferenceNumber;

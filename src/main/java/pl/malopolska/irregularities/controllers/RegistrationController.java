@@ -11,9 +11,11 @@ import pl.malopolska.irregularities.converters.RoleConverter;
 import pl.malopolska.irregularities.converters.UserConverter;
 import pl.malopolska.irregularities.dto.InstitutionDto;
 import pl.malopolska.irregularities.dto.UserDto;
+import pl.malopolska.irregularities.model.Passwords;
 import pl.malopolska.irregularities.model.Role;
 import pl.malopolska.irregularities.model.User;
 import pl.malopolska.irregularities.services.InstitutionService;
+import pl.malopolska.irregularities.services.PasswordService;
 import pl.malopolska.irregularities.services.RoleService;
 import pl.malopolska.irregularities.services.UserService;
 import pl.malopolska.irregularities.validators.UserValidator;
@@ -44,6 +46,9 @@ public class RegistrationController {
     @Autowired
     private RoleConverter roleConverter;
 
+    @Autowired
+    private PasswordService passwordService;
+
 
     @GetMapping("/registration")
     public String registrationSite(Model model){
@@ -61,11 +66,12 @@ public class RegistrationController {
 
         Role role = roleService.getRoleById(5L);
         userDto.setRoleDto(roleConverter.convertToDto(role));
-        userDto.setActive(false);
+        userDto.setActive(true);
         if (userService.checkUser(userDto)) {
             if (userValidator.validatePassword(userDto)) {
                 User user = userConverter.convertFromDto(userDto);
                 User savedUser = userService.saveUser(user);
+                passwordService.setPassword(savedUser, userDto.getPassword());
                 return new RedirectView("/login");
             }
             String error = "Hasła nie są identyczne lub nie pasują do wzoru!";

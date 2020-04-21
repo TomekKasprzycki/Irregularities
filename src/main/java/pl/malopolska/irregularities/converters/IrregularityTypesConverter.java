@@ -11,20 +11,20 @@ import java.util.List;
 @Service
 public class IrregularityTypesConverter {
 
-    private IrregularityConverter irregularityConverter;
-    private IrregularitiesService irregularitiesService;
-
-    private IrregularityTypesConverter(IrregularityConverter irregularityConverter,
-                                       IrregularitiesService irregularitiesService){
-        this.irregularitiesService = irregularitiesService;
-        this.irregularityConverter = irregularityConverter;
-    }
+//    private IrregularityConverter irregularityConverter;
+//    private IrregularitiesService irregularitiesService;
+//
+//    private IrregularityTypesConverter(IrregularityConverter irregularityConverter,
+//                                       IrregularitiesService irregularitiesService){
+//        this.irregularitiesService = irregularitiesService;
+//        this.irregularityConverter = irregularityConverter;
+//    }
 
     public IrregularityTypes convertFromDto(IrregularityTypesDto irregularityTypesDto){
         IrregularityTypes irregularityType = new IrregularityTypes();
         irregularityType.setId(irregularityTypesDto.getId());
         irregularityType.setName(irregularityTypesDto.getName());
-        irregularityType.setIrregularityList(irregularitiesService.getAllByIrregularityTypesId(irregularityTypesDto.getId()));
+//        irregularityType.setIrregularityList(irregularitiesService.getAllByIrregularityTypesId(irregularityTypesDto.getId()));
 
         return irregularityType;
     }
@@ -33,7 +33,7 @@ public class IrregularityTypesConverter {
         IrregularityTypesDto irregularityTypeDto = new IrregularityTypesDto();
         irregularityTypeDto.setId(irregularityTypes.getId());
         irregularityTypeDto.setName(irregularityTypes.getName());
-        irregularityTypeDto.setIrregularityDto(irregularityConverter.convertToDto(irregularityTypes.getIrregularityList()));
+//        irregularityTypeDto.setIrregularityDto(irregularityConverter.convertToDto(irregularityTypes.getIrregularityList()));
 
         return irregularityTypeDto;
     }

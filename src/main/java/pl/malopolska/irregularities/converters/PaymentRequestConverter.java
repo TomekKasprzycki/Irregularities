@@ -11,17 +11,17 @@ import java.util.List;
 @Service
 public class PaymentRequestConverter {
 
-    private IrregularityConverter irregularityConverter;
-    private ProjectConverter projectConverter;
-    private IrregularitiesService irregularitiesService;
-
-    private PaymentRequestConverter(IrregularityConverter irregularityConverter,
-                                    ProjectConverter projectConverter,
-                                    IrregularitiesService irregularitiesService){
-        this.irregularitiesService = irregularitiesService;
-        this.irregularityConverter = irregularityConverter;
-        this.projectConverter = projectConverter;
-    }
+//    private IrregularityConverter irregularityConverter;
+//    private ProjectConverter projectConverter;
+//    private IrregularitiesService irregularitiesService;
+//
+//    private PaymentRequestConverter(IrregularityConverter irregularityConverter,
+//                                    ProjectConverter projectConverter,
+//                                    IrregularitiesService irregularitiesService){
+//        this.irregularitiesService = irregularitiesService;
+//        this.irregularityConverter = irregularityConverter;
+//        this.projectConverter = projectConverter;
+//    }
 
     public PaymentRequest convertFromDto(PaymentRequestDto paymentRequestDto){
         PaymentRequest paymentRequest = new PaymentRequest();
@@ -31,8 +31,8 @@ public class PaymentRequestConverter {
         paymentRequest.setDateOfApproval(paymentRequestDto.getDateOfApproval());
         paymentRequest.setFunding(paymentRequestDto.getFunding());
         paymentRequest.setIncomeDeducted(paymentRequestDto.getIncomeDeducted());
-        paymentRequest.setIrregularityList(irregularitiesService.getAllByPaymentRequestId(paymentRequest.getId()));
-        paymentRequest.setProject(projectConverter.convertFromDto(paymentRequestDto.getProjectDto()));
+//        paymentRequest.setIrregularityList(irregularitiesService.getAllByPaymentRequestId(paymentRequest.getId()));
+//        paymentRequest.setProject(projectConverter.convertFromDto(paymentRequestDto.getProjectDto()));
         paymentRequest.setQualifiedExpenses(paymentRequestDto.getQualifiedExpenses());
         paymentRequest.setQualifiedExpensesAfterValidation(paymentRequestDto.getQualifiedExpensesAfterValidation());
         paymentRequest.setTotalExpenses(paymentRequestDto.getTotalExpenses());
@@ -48,8 +48,8 @@ public class PaymentRequestConverter {
         paymentRequestDto.setDateOfApproval(paymentRequest.getDateOfApproval());
         paymentRequestDto.setFunding(paymentRequest.getFunding());
         paymentRequestDto.setIncomeDeducted(paymentRequest.getIncomeDeducted());
-        paymentRequestDto.setIrregularityDto(irregularityConverter.convertToDto(paymentRequest.getIrregularityList()));
-        paymentRequestDto.setProjectDto(projectConverter.convertToDto(paymentRequest.getProject()));
+//        paymentRequestDto.setIrregularityDto(irregularityConverter.convertToDto(paymentRequest.getIrregularityList()));
+//        paymentRequestDto.setProjectDto(projectConverter.convertToDto(paymentRequest.getProject()));
         paymentRequestDto.setQualifiedExpenses(paymentRequest.getQualifiedExpenses());
         paymentRequestDto.setQualifiedExpensesAfterValidation(paymentRequest.getQualifiedExpensesAfterValidation());
         paymentRequestDto.setTotalExpenses(paymentRequest.getTotalExpenses());

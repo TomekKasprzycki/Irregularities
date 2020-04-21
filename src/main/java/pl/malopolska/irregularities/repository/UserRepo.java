@@ -22,10 +22,10 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u JOIN FETCH u.role JOIN FETCH u.institution WHERE u.id=:id")
     User findUserById(@Param("id") Long id);
 
-    @Query(value="SELECT id, active, email, firstName, lastName, password, institution_id, role_id FROM user WHERE user.active=1", nativeQuery = true)
+    @Query(value="SELECT id, active, email, first_name, last_name, institution_id, role_id FROM user WHERE user.active=1", nativeQuery = true)
     List<User> findAllActive();
 
-    @Query(value="SELECT id, active, email, firstName, lastName, password, institution_id, role_id FROM user WHERE user.active=0", nativeQuery = true)
+    @Query(value="SELECT id, active, email, first_name, last_name, institution_id, role_id FROM user WHERE user.active=0", nativeQuery = true)
     List<User> findAllUnActive();
 
     @Query(value = "update user set user.active=1 where user.id=:id", nativeQuery = true)

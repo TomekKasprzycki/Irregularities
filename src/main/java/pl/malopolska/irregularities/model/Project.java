@@ -21,10 +21,10 @@ public class Project {
     private String projectNumber;
     @ManyToOne
     @JoinColumn(name = "beneficiary_id", referencedColumnName = "id")
-    Beneficiary beneficiary;
+    private Beneficiary beneficiary;
     @OneToMany(mappedBy = "project")
-    List<PaymentRequest> paymentRequestList;
+    private List<PaymentRequest> paymentRequestList;
     @OneToMany(mappedBy = "project")
-    List<Irregularity> irregularityList;
+    private List<Irregularity> irregularityList;
 
 }

@@ -1,14 +1,14 @@
 package pl.malopolska.irregularities.controllers;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class HomeController {
 
     @GetMapping("/")
     public String goHome(){
-        return "Witajcie w naszej bajce";
+        return "index";
     }
 
     @GetMapping("/about")

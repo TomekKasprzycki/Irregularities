@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import pl.malopolska.irregularities.dto.UserDto;
 import pl.malopolska.irregularities.model.User;
+import pl.malopolska.irregularities.services.PasswordService;
 import pl.malopolska.irregularities.services.UserService;
 import pl.malopolska.irregularities.validators.UserValidator;
 
@@ -21,19 +22,22 @@ public class LoginController {
     private UserService userService;
 
     @Autowired
+    private PasswordService passwordService;
+
+    @Autowired
     private UserValidator userValidator;
 
     @GetMapping("/login")
-    public String login() {
-//        model.addAttribute("userDto", new UserDto());
-        return "login";
+    public String login(Model model) {
+        model.addAttribute("userDto", new UserDto());
+        return "loginForm";
     }
 
     @PostMapping("/login")
     public RedirectView loginToService(UserDto userDto, HttpServletRequest request) {
         User user = userService.getUserByEmail(userDto.getEmail());
         if (user!=null) {
-            if (user.checkPassword(userDto.getPassword())) {
+            if (passwordService.checkPassword(user, userDto.getPassword())) {
                 final HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 return new RedirectView("/main/mainPage");

@@ -4,19 +4,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.time.LocalDate;
 
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
-public class Institution {
+public class Passwords {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-
-    @OneToMany(mappedBy = "institution")
-    private List<User> userList;
-
+    private String password;
+    private LocalDate createdDate;
+    @ManyToOne
+    @JoinColumn(name = "user_ID",referencedColumnName = "id")
+    private User user;
 }

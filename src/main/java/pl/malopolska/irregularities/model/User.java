@@ -27,24 +27,24 @@ public class User {
     private String email;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
-    Role role;
-    @NotNull
-    private String password;
+    private Role role;
+    @OneToMany(mappedBy = "user")
+    private List<Passwords> password;
     private boolean active;
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="institution_id",referencedColumnName = "id")
-    Institution institution;
+    private Institution institution;
 
     @OneToMany(mappedBy = "creator")
-    List<Irregularity> irregularityList;
+    private List<Irregularity> irregularityList;
 
-    public void setPassword(String unHashedPassword){
-        this.password=BCrypt.hashpw(unHashedPassword, BCrypt.gensalt());
-    }
-
-    public Boolean checkPassword(String unHashedPassword){
-        return BCrypt.checkpw(unHashedPassword,this.password);
-    }
+//    public void setPassword(String unHashedPassword){
+//        this.password=BCrypt.hashpw(unHashedPassword, BCrypt.gensalt());
+//    }
+//
+//    public Boolean checkPassword(String unHashedPassword){
+//        return BCrypt.checkpw(unHashedPassword,this.password);
+//    }
 
 }
